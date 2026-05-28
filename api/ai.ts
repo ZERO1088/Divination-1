@@ -1,4 +1,5 @@
 
+console.log('读取到的API Key:', process.env.QWEN_API_KEY);
 export default async function handler(req: any, res: any) {
   // 只允许 POST
   if (req.method !== 'POST') {
@@ -8,10 +9,15 @@ export default async function handler(req: any, res: any) {
   }
 
   try {
-    const { messages, model, temperature } = req.body;
+    const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+     console.log('解析后的body:', body);
+      const { messages, temperature } = body;
+    console.log('messages:', messages);
+
+
 
     const response = await fetch(
-      'https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation',
+      'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions',
       {
         method: 'POST',
 
@@ -23,15 +29,17 @@ export default async function handler(req: any, res: any) {
         },
 
         body: JSON.stringify({
-          model: model || 'qwen-turbo',
-          messages,
+          model:'qwen-turbo',
+          messages: messages,
           temperature: temperature || 0.7,
           stream: false,
         }),
       }
     );
 
-    const data = await response.json();
+    const text = await response.text(); 
+    console.log('通义返回原始内容:', text);
+     const data = JSON.parse(text);
 
     return res.status(200).json(data);
 

@@ -54,7 +54,7 @@ export const qwenConfig: AIConfig = {
     return '';
   },
   get model() {
-    return import.meta.env.VITE_QWEN_MODEL ?? 'qwen-plus';
+    return import.meta.env.VITE_QWEN_MODEL ?? 'qwen-turbo';
   },
   get timeoutMs() {
     const raw = import.meta.env.VITE_QWEN_TIMEOUT;
@@ -62,7 +62,7 @@ export const qwenConfig: AIConfig = {
   },
   get temperature() {
     const raw = import.meta.env.VITE_QWEN_TEMPERATURE;
-    return raw ? Number(raw) : 0.3;
+    return raw ? Number(raw) : 0.7;
   },
   provider: 'qwen',
 } as const;
