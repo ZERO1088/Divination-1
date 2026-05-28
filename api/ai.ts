@@ -11,7 +11,7 @@ export default async function handler(req: any, res: any) {
     const { messages, model, temperature } = req.body;
 
     const response = await fetch(
-      'https://api.deepseek.com/v1/chat/completions',
+      'https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation',
       {
         method: 'POST',
 
@@ -19,11 +19,11 @@ export default async function handler(req: any, res: any) {
           'Content-Type': 'application/json',
 
           // 真正的 Key
-          Authorization: `Bearer ${process.env.DEEPSEEK_API_KEY}`,
+          Authorization: `Bearer ${process.env.QWEN_API_KEY}`,
         },
 
         body: JSON.stringify({
-          model: model || 'deepseek-chat',
+          model: model || 'qwen-turbo',
           messages,
           temperature: temperature || 0.7,
           stream: false,
