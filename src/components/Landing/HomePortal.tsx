@@ -323,7 +323,7 @@ export default function HomePortal(): ReactNode {
       <ParticleSystem type="ambient" density={15} />
 
       {/* 中心 Logo */}
-      <motion.div
+      {/* <motion.div
         className="absolute top-[12%] left-1/2 -translate-x-1/2 text-center z-20"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -343,7 +343,7 @@ export default function HomePortal(): ReactNode {
           占卜
         </motion.div>
         <div className="w-px h-8 bg-gradient-to-b from-transparent via-amber-200/20 to-transparent mx-auto" />
-      </motion.div>
+      </motion.div> */}
 
       {/* 两个空间入口 */}
       <div className="absolute inset-0 flex items-center justify-center gap-16 z-10">
