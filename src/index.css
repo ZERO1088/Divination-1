@@ -1,0 +1,750 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   「玄机」全局样式系统
+   设计根：虚空黑 · 琥珀金 · 毛玻璃 · 光晕替投影
+   ============================================================ */
+
+@layer base {
+  body {
+    @apply bg-brand-void text-brand-text-primary antialiased;
+    margin: 0;
+    min-height: 100vh;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.004'/%3E%3C/svg%3E");
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+  }
+}
+
+/* ============================================================
+   卡片体系
+   ============================================================ */
+@layer components {
+  .glass-card {
+    @apply backdrop-blur-xl rounded-2xl;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+    transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease, background-color 200ms ease;
+  }
+  .glass-card:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 24px rgba(253, 230, 138, 0.06), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .glass-card-sm {
+    @apply backdrop-blur-xl rounded-xl;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+  }
+  .glass-card-sm:hover {
+    border-color: rgba(255, 255, 255, 0.10);
+    box-shadow: 0 0 16px rgba(253, 230, 138, 0.04);
+    transform: translateY(-1px);
+  }
+
+  .glass-card-lg {
+    @apply backdrop-blur-xl rounded-3xl;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06);
+    transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+  }
+  .glass-card-lg:hover {
+    border-color: rgba(253, 230, 138, 0.20);
+    box-shadow: 0 0 24px rgba(253, 230, 138, 0.08), 0 0 0 1px rgba(253, 230, 138, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .glass-card-accent {
+    @apply backdrop-blur-xl rounded-2xl;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 2px solid rgba(253, 230, 138, 0.40);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+  }
+
+  .glass-card-danger {
+    @apply backdrop-blur-xl rounded-2xl;
+    background: rgba(248, 113, 113, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 2px solid rgba(248, 113, 113, 0.30);
+  }
+
+  .glass-card-static {
+    @apply backdrop-blur-xl rounded-2xl;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+  }
+}
+
+/* ============================================================
+   按钮体系
+   ============================================================ */
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 rounded-xl font-medium transition-all duration-200
+           bg-amber-200/10 text-amber-200 border border-amber-200/20
+           hover:bg-amber-200/20 hover:shadow-[0_0_24px_rgba(253,230,138,0.18)]
+           active:scale-[0.97]
+           disabled:opacity-40 disabled:cursor-not-allowed
+           disabled:hover:bg-amber-200/10 disabled:hover:shadow-none
+           disabled:active:scale-100
+           focus-visible:outline-none focus-visible:ring-2
+           focus-visible:ring-amber-200/40 focus-visible:ring-offset-2
+           focus-visible:ring-offset-[#080a0f];
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 rounded-xl font-medium transition-all duration-200
+           bg-white/5 text-stone-300 border border-white/10
+           hover:bg-white/[0.08] hover:border-white/[0.15]
+           active:scale-[0.97]
+           disabled:opacity-40 disabled:cursor-not-allowed
+           disabled:hover:bg-white/5 disabled:hover:border-white/10
+           disabled:active:scale-100;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-150
+           text-stone-400
+           hover:text-amber-200
+           active:scale-[0.97]
+           disabled:opacity-40 disabled:cursor-not-allowed
+           disabled:hover:text-stone-400;
+  }
+
+  .btn-danger {
+    @apply px-6 py-3 rounded-xl font-medium transition-all duration-200
+           bg-red-400/10 text-red-300 border border-red-400/20
+           hover:bg-red-400/20 hover:shadow-[0_0_20px_rgba(248,113,113,0.15)]
+           active:scale-[0.97]
+           disabled:opacity-40 disabled:cursor-not-allowed
+           disabled:hover:bg-red-400/10 disabled:hover:shadow-none
+           disabled:active:scale-100;
+  }
+
+  .btn-cta {
+    @apply btn-primary;
+    animation: breathe 3s ease-in-out infinite;
+  }
+
+  .btn-ritual {
+    @apply px-8 py-4 rounded-2xl font-serif tracking-widest transition-all duration-200
+           bg-amber-200/10 text-amber-200 border border-amber-200/25
+           hover:bg-amber-200/20 hover:border-amber-200/40
+           hover:shadow-[0_0_48px_rgba(253,230,138,0.22),0_0_80px_rgba(253,230,138,0.08)]
+           active:scale-[0.96]
+           disabled:opacity-50 disabled:cursor-not-allowed
+           disabled:hover:bg-amber-200/10 disabled:hover:border-amber-200/25
+           disabled:hover:shadow-none disabled:active:scale-100;
+    animation: breathe 3s ease-in-out infinite;
+  }
+}
+
+/* ============================================================
+   Tarot 卡背
+   ============================================================ */
+@layer components {
+  /* ============================================================
+     塔罗卡牌 - 玻璃态磨砂效果 (REFINED)
+     深色底 + 背景模糊 + 暗金边框 + 内阴影
+     ============================================================ */
+  .tarot-back {
+    /* 玻璃态磨砂底色 - 75%-85% 实体感 */
+    background: linear-gradient(
+      165deg,
+      rgba(26, 21, 34, 0.88) 0%,
+      rgba(35, 28, 45, 0.85) 50%,
+      rgba(26, 21, 34, 0.88) 100%
+    );
+    /* backdrop-filter 玻璃态磨砂 */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    /* 暗金色边框 - 与深色背景明显区分 */
+    border: 1px solid rgba(180, 150, 80, 0.35);
+    border-radius: 10px;
+    /* 内阴影增加立体感 */
+    box-shadow:
+      inset 0 1px 2px rgba(0, 0, 0, 0.4),
+      inset 0 -1px 1px rgba(255, 215, 130, 0.05),
+      0 4px 20px rgba(0, 0, 0, 0.5),
+      0 0 1px rgba(180, 150, 80, 0.2);
+  }
+
+  .tarot-back-border {
+    /* 内部边框更细腻 */
+    border: 1px solid rgba(180, 150, 80, 0.18);
+    border-radius: 7px;
+    position: relative;
+    overflow: hidden;
+    /* 内阴影增加深度 */
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .tarot-back-diamond {
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(
+      135deg,
+      rgba(212, 175, 55, 0.25) 0%,
+      rgba(180, 140, 60, 0.18) 100%
+    );
+    transform: rotate(45deg);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    position: relative;
+    z-index: 1;
+    /* 微光效果 */
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.15);
+  }
+
+  .tarot-back-star {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: rgba(212, 175, 55, 0.45);
+    border-radius: 50%;
+    /* 微光 */
+    box-shadow: 0 0 6px rgba(212, 175, 55, 0.3);
+  }
+
+  .tarot-back-star.top-left     { top: 10px;  left: 10px; }
+  .tarot-back-star.top-right    { top: 10px;  right: 10px; }
+  .tarot-back-star.bottom-left  { bottom: 10px; left: 10px; }
+  .tarot-back-star.bottom-right { bottom: 10px; right: 10px; }
+
+  /* ============================================================
+     塔罗卡牌 - hover 状态 (REFINED)
+     柔和放大 + 金色外发光 + 轻微提亮
+     ============================================================ */
+  .tarot-card-glass {
+    /* 基础玻璃态 - 更实体化 */
+    background: linear-gradient(
+      165deg,
+      rgba(26, 21, 34, 0.82) 0%,
+      rgba(35, 28, 45, 0.80) 50%,
+      rgba(26, 21, 34, 0.82) 100%
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(180, 150, 80, 0.30);
+    border-radius: 10px;
+    box-shadow:
+      inset 0 1px 2px rgba(0, 0, 0, 0.4),
+      0 4px 16px rgba(0, 0, 0, 0.4),
+      0 0 1px rgba(180, 150, 80, 0.15);
+    transition: all 0.25s ease-out;
+  }
+
+  .tarot-card-glass:hover {
+    /* 轻微提亮透明度 */
+    background: linear-gradient(
+      165deg,
+      rgba(32, 26, 42, 0.90) 0%,
+      rgba(42, 34, 55, 0.88) 50%,
+      rgba(32, 26, 42, 0.90) 100%
+    );
+    /* 金色外发光 */
+    box-shadow:
+      inset 0 1px 2px rgba(0, 0, 0, 0.35),
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      0 0 20px rgba(212, 175, 55, 0.12),
+      0 0 1px rgba(212, 175, 55, 0.3);
+    transform: translateY(-4px) scale(1.03);
+  }
+
+  /* 选中状态 - 高亮边框 */
+  .tarot-card-selected {
+    border-color: rgba(212, 175, 55, 0.6) !important;
+    box-shadow:
+      inset 0 1px 2px rgba(0, 0, 0, 0.3),
+      0 0 30px rgba(212, 175, 55, 0.25),
+      0 0 60px rgba(212, 175, 55, 0.1),
+      0 0 1px rgba(212, 175, 55, 0.5) !important;
+  }
+}
+
+/* ============================================================
+   实用工具
+   ============================================================ */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* 月光脉动（Tarot Space） */
+  @keyframes moonPulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.05); }
+  }
+
+  /* 晨曦脉动（I Ching Space） */
+  @keyframes dawnPulse {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.03); }
+  }
+}
+
+/* ============================================================
+   聚光灯 & 深度层级 (VISUAL_REFACTOR)
+   ============================================================ */
+@layer components {
+  /* 选中牌的聚光灯背景 */
+  .spotlight-bg {
+    background: radial-gradient(ellipse 500px 400px at center, rgba(253,230,138,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* 舞台暗色遮罩 (选牌后覆盖背景) */
+  .stage-mask {
+    background: rgba(8,10,15,0.50);
+    backdrop-filter: blur(3px);
+  }
+
+  /* 非选中牌弱化态 */
+  .card-dimmed {
+    opacity: 0.08;
+    filter: blur(8px);
+    transform: scale(0.92);
+    pointer-events: none;
+    transition: opacity 0.6s ease, filter 0.6s ease, transform 0.6s ease;
+  }
+
+  /* 命中句容器 */
+  .destiny-sentence {
+    position: relative;
+    text-align: center;
+    padding: 15vh 1rem;
+  }
+  .destiny-sentence::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 400px 200px at center, rgba(253,230,138,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* 渐进展开区节标题 */
+  .section-divider {
+    width: 80px;
+    height: 1px;
+    background: rgba(253,230,138,0.30);
+    margin: 80px auto 20px;
+  }
+
+  /* 爻线可视化 */
+  .yao-bar {
+    height: 7px;
+    border-radius: 4px;
+    background: rgba(253,230,138,0.40);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+  .yao-bar--changing {
+    background: rgba(253,230,138,0.70);
+    box-shadow: 0 0 14px rgba(253,230,138,0.22);
+  }
+  .yao-placeholder {
+    height: 2px;
+    background: repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,0.06) 0px,
+      rgba(255,255,255,0.06) 4px,
+      transparent 4px,
+      transparent 8px
+    );
+    border-radius: 1px;
+  }
+
+  /* 动爻脉动光点 */
+  .changing-pulse {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #fde68a;
+    animation: changingPulse 1.6s ease-in-out infinite;
+    box-shadow: 0 0 8px rgba(253,230,138,0.50), 0 0 18px rgba(253,230,138,0.18);
+  }
+
+  /* 仪式圆形按钮 */
+  .ritual-circle {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: rgba(253,230,138,0.07);
+    border: 1.5px solid rgba(253,230,138,0.22);
+    box-shadow: 0 0 32px rgba(253,230,138,0.08), 0 0 60px rgba(253,230,138,0.03);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+  }
+  .ritual-circle:hover {
+    background: rgba(253,230,138,0.14);
+    border-color: rgba(253,230,138,0.38);
+    box-shadow: 0 0 48px rgba(253,230,138,0.16), 0 0 80px rgba(253,230,138,0.05);
+    transform: scale(1.05);
+  }
+  .ritual-circle:active {
+    transform: scale(0.95);
+  }
+  .ritual-circle:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+/* ============================================================
+   关键帧动画 (VISUAL_REFACTOR)
+   ============================================================ */
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes changingPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scale(1.55);
+    opacity: 1;
+  }
+}
+
+@keyframes lockPulse {
+  0% { box-shadow: 0 0 0 rgba(253,230,138,0); }
+  50% { box-shadow: 0 0 20px rgba(253,230,138,0.18), 0 0 40px rgba(253,230,138,0.05); }
+  100% { box-shadow: 0 0 0 rgba(253,230,138,0); }
+}
+
+@keyframes yaoFallIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rippleOut {
+  0% {
+    box-shadow: 0 0 0 0 rgba(253,230,138,0.30);
+  }
+  100% {
+    box-shadow: 0 0 0 24px rgba(253,230,138,0);
+  }
+}
+
+/* ============================================================
+   塔罗命运舞台样式
+   ============================================================ */
+
+/* 舞台背景 */
+.fate-stage-bg {
+  background: radial-gradient(
+    ellipse 120% 80% at 50% 50%,
+    rgba(30, 20, 40, 0.95) 0%,
+    rgba(15, 10, 20, 0.98) 50%,
+    #0a0a0f 100%
+  );
+}
+
+/* 舞台遮罩 */
+.fate-stage-mask {
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 50%,
+    rgba(15, 10, 20, 0.85) 0%,
+    rgba(10, 8, 15, 0.95) 60%,
+    rgba(5, 5, 10, 0.98) 100%
+  );
+}
+
+/* 聚光灯效果 */
+.fate-spotlight {
+  background: radial-gradient(
+    ellipse 50% 40% at 50% 50%,
+    rgba(212, 175, 55, 0.08) 0%,
+    rgba(20, 15, 30, 0.95) 40%,
+    rgba(5, 5, 10, 0.98) 70%,
+    #050508 100%
+  );
+}
+
+/* 中心光晕 */
+.fate-glow {
+  background: radial-gradient(
+    circle,
+    rgba(212, 175, 55, 0.4) 0%,
+    rgba(212, 175, 55, 0.1) 40%,
+    transparent 70%
+  );
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
+}
+
+/* 引导线效果 */
+.fate-guiding-line {
+  pointer-events: none;
+}
+
+/* 选中牌光晕 */
+.fate-card-glow {
+  background: radial-gradient(
+    ellipse 120% 120% at 50% 50%,
+    rgba(212, 175, 55, 0.15) 0%,
+    rgba(212, 175, 55, 0.05) 50%,
+    transparent 70%
+  );
+  filter: blur(20px);
+}
+
+/* 月光脉动 */
+@keyframes moonPulse {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.25;
+    transform: scale(1.05);
+  }
+}
+
+/* 晨曦脉动 */
+@keyframes dawnPulse {
+  0%, 100% {
+    opacity: 0.12;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.2;
+    transform: scale(1.08);
+  }
+}
+
+/* 粒子漂浮 */
+@keyframes particleFloat {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.3;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(20px);
+    opacity: 0;
+  }
+}
+
+/* 命运呼吸 */
+@keyframes fateBreath {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* ============================================================
+   六爻铜钱样式
+   ============================================================ */
+
+/* 铜钱摇晃动画 */
+@keyframes coinShake {
+  0%, 100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  10% {
+    transform: rotate(-15deg) translateY(-5px);
+  }
+  20% {
+    transform: rotate(12deg) translateY(-8px);
+  }
+  30% {
+    transform: rotate(-10deg) translateY(-10px);
+  }
+  40% {
+    transform: rotate(8deg) translateY(-12px);
+  }
+  50% {
+    transform: rotate(-6deg) translateY(-15px);
+  }
+  60% {
+    transform: rotate(5deg) translateY(-10px);
+  }
+  70% {
+    transform: rotate(-3deg) translateY(-5px);
+  }
+  80% {
+    transform: rotate(2deg) translateY(-2px);
+  }
+  90% {
+    transform: rotate(-1deg) translateY(0);
+  }
+}
+
+.animate-coin-shake {
+  animation: coinShake 0.6s ease-in-out;
+}
+
+/* 动爻呼吸效果 */
+@keyframes changingBreath {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(220, 38, 38, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(220, 38, 38, 0.6);
+  }
+}
+
+/* 六爻爻线动效 */
+.hexagram-line {
+  @apply relative;
+}
+
+.hexagram-line.changing {
+  animation: changingBreath 2s ease-in-out infinite;
+}
+
+/* ============================================================
+   六爻页面样式
+   ============================================================ */
+
+/* 擦灰动画 */
+@keyframes dustWipe {
+  0% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+}
+
+.dust-wipe-reveal {
+  animation: dustWipe 1.5s ease-out forwards;
+}
+
+.dust-wipe-reveal-delayed {
+  animation: dustWipe 1.2s ease-out 0.3s forwards;
+}
+
+/* 铜钱容器 */
+.qianlong-coin-container {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+}
+
+/* 铜钱光泽效果 */
+.qianlong-coin-shine {
+  background: linear-gradient(
+    135deg,
+    rgba(201, 169, 97, 0.3) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(201, 169, 97, 0.1) 100%
+  );
+}
+
+/* 爻线统一样式 */
+.iching-hexagram {
+  @apply flex flex-col items-center gap-3;
+}
+
+.iching-hexagram-line {
+  @apply relative flex items-center justify-center;
+  min-height: 24px;
+}
+
+/* 阳爻 - 完整横线 */
+.yang-line {
+  @apply bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600;
+  height: 3px;
+  min-width: 60px;
+  border-radius: 2px;
+  box-shadow: 0 0 4px rgba(201, 169, 97, 0.3);
+}
+
+/* 阴爻 - 两段短线 */
+.yin-line {
+  @apply relative flex items-center justify-center gap-3;
+  min-width: 60px;
+}
+
+.yin-line::before,
+.yin-line::after {
+  content: '';
+  @apply bg-gradient-to-r from-amber-600 to-amber-700;
+  height: 3px;
+  width: 24px;
+  border-radius: 2px;
+  box-shadow: 0 0 4px rgba(201, 169, 97, 0.3);
+}
+
+/* 动爻高亮 - 朱砂红 */
+.changing-line.yang-line {
+  @apply bg-gradient-to-r from-red-600 via-red-500 to-red-600;
+  box-shadow: 0 0 8px rgba(220, 38, 38, 0.5);
+}
+
+.changing-line.yin-line::before,
+.changing-line.yin-line::after {
+  @apply bg-gradient-to-r from-red-600 to-red-700;
+  box-shadow: 0 0 8px rgba(220, 38, 38, 0.5);
+}
+
+/* 爻位标注对齐 */
+.line-position {
+  @apply absolute left-[-50px] text-amber-700/60;
+  font-size: 11px;
+  min-width: 40px;
+  text-align: right;
+}
+
+/* 解读区遮罩 */
+.interpretation-mask {
+  @apply absolute inset-0 bg-gradient-to-r from-stone-900 to-stone-800;
+  opacity: 0.95;
+}
+
+/* 解读内容淡入 */
+.interpretation-content {
+  opacity: 0;
+  transition: opacity 0.8s ease-out;
+}
+
+.interpretation-content.visible {
+  opacity: 1;
+}
